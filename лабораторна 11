@@ -1,0 +1,65 @@
+import csv
+
+# Функція для читання даних із CSV файлу
+def read_csv(file_path):
+    data = []
+    try:
+        with open(file_path, mode='r', encoding='utf-8') as file:
+            reader = csv.reader(file)
+            headers = next(reader)  # Зчитуємо заголовки
+            year_index = headers.index("Year")
+            gdp_index = headers.index("GDP per capita (current US$)")
+            country_index = headers.index("Country Name")
+
+            for row in reader:
+                if row[country_index] == 'Ukraine' and 1991 <= int(row[year_index]) <= 2019:
+                    data.append({'Year': int(row[year_index]), 'GDP per capita': float(row[gdp_index])})
+    except FileNotFoundError:
+        print(f"Файл {file_path} не знайдено.")
+    except Exception as e:
+        print(f"Помилка при обробці файлу: {e}")
+    return data
+
+# Функція для пошуку мінімального та максимального значень
+def find_min_max(data):
+    min_gdp = min(data, key=lambda x: x['GDP per capita'])
+    max_gdp = max(data, key=lambda x: x['GDP per capita'])
+    return min_gdp, max_gdp
+
+# Функція для запису результатів у новий CSV файл
+def write_csv(file_path, min_gdp, max_gdp):
+    try:
+        with open(file_path, mode='w', encoding='utf-8', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Type', 'Year', 'GDP per capita'])
+            writer.writerow(['Min', min_gdp['Year'], min_gdp['GDP per capita']])
+            writer.writerow(['Max', max_gdp['Year'], max_gdp['GDP per capita']])
+        print(f"Результати записано в файл {file_path}")
+    except Exception as e:
+        print(f"Помилка при записі файлу: {e}")
+
+# Головна функція
+def main():
+    input_file = 'world_bank_gdp.csv'  # Ім'я вхідного файлу, що завантажено з порталу
+    output_file = 'gdp_results.csv'    # Ім'я вихідного файлу для результатів
+
+    # Читаємо дані з файлу
+    data = read_csv(input_file)
+
+    # Виводимо дані на екран
+    if data:
+        print("GDP per capita for Ukraine (1991-2019):")
+        for record in data:
+            print(f"Year: {record['Year']}, GDP per capita: {record['GDP per capita']}")
+
+        # Знаходимо мінімальне та максимальне значення
+        min_gdp, max_gdp = find_min_max(data)
+
+        # Записуємо результати в новий файл
+        write_csv(output_file, min_gdp, max_gdp)
+    else:
+        print("Дані не знайдено.")
+
+# Запускаємо програму
+if __name__ == "__main__":
+    main()
