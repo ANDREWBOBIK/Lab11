@@ -1,6 +1,6 @@
 import csv
 
-# Функція для читання даних із CSV файлу
+# Функція для читання даних з CSV файлу
 def read_csv(file_path):
     data = []
     try:
@@ -63,3 +63,45 @@ def main():
 # Запускаємо програму
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+Зміст csv файлу
+
+
+
+Country Name,Year,GDP per capita (current US$)
+Ukraine,1991,1200.50
+Ukraine,1992,1300.75
+Ukraine,1993,1400.30
+Ukraine,1994,1500.00
+Ukraine,1995,1600.10
+Ukraine,1996,1700.40
+Ukraine,1997,1800.50
+Ukraine,1998,1900.60
+Ukraine,1999,2000.70
+Ukraine,2000,2100.80
+Ukraine,2001,2200.90
+Ukraine,2002,2300.00
+Ukraine,2003,2400.10
+Ukraine,2004,2500.20
+Ukraine,2005,2600.30
+Ukraine,2006,2700.40
+Ukraine,2007,2800.50
+Ukraine,2008,2900.60
+Ukraine,2009,3000.70
+Ukraine,2010,3100.80
+Ukraine,2011,3200.90
+Ukraine,2012,3300.00
+Ukraine,2013,3400.10
+Ukraine,2014,3500.20
+Ukraine,2015,3600.30
+Ukraine,2016,3700.40
+Ukraine,2017,3800.50
+Ukraine,2018,3900.60
+Ukraine,2019,4000.70
